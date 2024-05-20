@@ -2,11 +2,22 @@ from flask import Blueprint,render_template
 from . import db 
 bp = Blueprint('artists',__name__, url_prefix= '/artist')
 
+@bp.route('/<int:id>')
+def detalle(id):
+    con = db.get_db()
+    consulta1 = """
+        SELECT name FROM artists WHERE ArtistId = ?;
+    """
+    consulta2 = """
+        SELECT AlbumId ,Title FROM albums WHERE ArtistId = ?;
+"""
+res = con.execute(consulta1, (id,)) #me quede aqui, continua con las fotos del celu.
+
 @bp.route('/')
 def artists():
     data_base = db.get_db() #Consigue la base de datos que estaba en db.py#
     ask = """
-            SELECT name FROM artists
+            SELECT name, ArtistId FROM artists
             ORDER BY name ASC;
           """
     
