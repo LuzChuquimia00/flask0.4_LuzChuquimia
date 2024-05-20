@@ -1,7 +1,7 @@
-from flask import Flask, send_file, render_template
+from flask import Flask, render_template
 
 app = Flask(__name__)
-#
+
 with app.app_context():
     from . import db
     db.init_app(app)
@@ -18,15 +18,17 @@ def hello():
 #def favicon():
 #    return send_file('static/favicon.ico') 
 
-@app.route('/themes')
-def songs():
+@app.route('/artists')
+def artists():
     data_base = db.get_db() #Consigue la base de datos que estaba en db.py#
     ask = """
             SELECT name FROM artists
-            ORDER BY name DESC;
+            ORDER BY name ASC;
           """
     
     result = data_base.execute(ask)
     list_of_result = result.fetchall()
     
-    return render_template("songs.html", songs=list_of_result) 
+    return render_template("artists.html", artists=list_of_result)
+
+

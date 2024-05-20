@@ -39,7 +39,7 @@ def init_db():
     except OSError:
         pass
     db = get_db()
-    with current_app.open_instance_resource(db_sql_file) as f:
+    with current_app.open_resource(db_sql_file) as f:
         db.executescript(f.read().decode('utf8'))
 
 @click.command('init-db')
