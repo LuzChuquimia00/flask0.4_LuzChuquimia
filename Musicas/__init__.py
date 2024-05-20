@@ -18,17 +18,7 @@ def hello():
 #def favicon():
 #    return send_file('static/favicon.ico') 
 
-@app.route('/artists')
-def artists():
-    data_base = db.get_db() #Consigue la base de datos que estaba en db.py#
-    ask = """
-            SELECT name FROM artists
-            ORDER BY name ASC;
-          """
-    
-    result = data_base.execute(ask)
-    list_of_result = result.fetchall()
-    
-    return render_template("artists.html", artists=list_of_result)
+from . import artists
+app.register_blueprint(artists.bp)
 
 
