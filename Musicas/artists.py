@@ -10,8 +10,16 @@ def detalle(id):
     """
     consulta2 = """
         SELECT AlbumId ,Title FROM albums WHERE ArtistId = ?;
-"""
-res = con.execute(consulta1, (id,)) #me quede aqui, continua con las fotos del celu.
+    """
+    
+    res = con.execute(consulta1, (id,))#me quede aqui, continua con las fotos del celu.
+    artists = res.fetchone()
+    res = con.execute(consulta2, (id,))
+    lista_musicas = res.fetchall()
+    pagina = render_template('detalle_artist.html', 
+                            artists=artists,   
+                            musicas=lista_musicas)
+    return pagina
 
 @bp.route('/')
 def artists():
