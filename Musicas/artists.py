@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template
 from . import db 
-bp = Blueprint('artists',__name__, url_prefix= '/artist')
+bp = Blueprint('artist',__name__, url_prefix= '/artist')
 
 @bp.route('/<int:id>')
 def detalle(id):
@@ -12,12 +12,12 @@ def detalle(id):
         SELECT AlbumId ,Title FROM albums WHERE ArtistId = ?;
     """
     
-    res = con.execute(consulta1, (id,))#me quede aqui, continua con las fotos del celu.
-    artists = res.fetchone()
+    res = con.execute(consulta1, (id,))
+    artista = res.fetchone()
     res = con.execute(consulta2, (id,))
     lista_musicas = res.fetchall()
     pagina = render_template('detalle_artist.html', 
-                            artists=artists,   
+                            artista=artista,   
                             musicas=lista_musicas)
     return pagina
 

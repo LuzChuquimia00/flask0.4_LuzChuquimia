@@ -20,5 +20,3 @@ def hello():
 
 from . import artists
 app.register_blueprint(artists.bp)
-
-
