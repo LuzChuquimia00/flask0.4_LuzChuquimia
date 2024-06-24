@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title %}Detalles de Albums{% endblock %} {%
+block header %}Canciones de {{ albums ['title']}} {% endblock %} {% block content %}
+<ul>
+  {%for canciones in canciones %}
+  <li>{{ canciones['name']}}
+  </li>
+  {%endfor%}
+</ul>
+{% endblock %}
