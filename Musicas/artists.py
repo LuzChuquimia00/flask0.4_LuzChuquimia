@@ -15,10 +15,10 @@ def detalle(id):
     res = con.execute(consulta1, (id,))
     artista = res.fetchone()
     res = con.execute(consulta2, (id,))
-    lista_musicas = res.fetchall()
+    lista_artist= res.fetchall()
     pagina = render_template('detalle_artist.html', 
                             artista=artista,   
-                            musicas=lista_musicas)
+                            artists=lista_artist)
     return pagina
 
 @bp.route('/')
@@ -30,6 +30,6 @@ def artists():
           """
     
     result = data_base.execute(ask)
-    list_of_result = result.fetchall()
+    lista_de_artist = result.fetchall()
     
-    return render_template("artists.html", artists=list_of_result)
+    return render_template("artists.html", artists=lista_de_artist)
